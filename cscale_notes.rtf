@@ -1,0 +1,33 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf340
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Thoughtstream:\
+\
+I\'92ve been swamped at work and at home all week, and kindly thank you for your unlimited timeframe on this.\
+\
+(after having read the first page)\
+This problem seems to be simple. This is a 3d matrix with mines in it, a time series component in which the ship moves, and an apparently instant projectile scan. We need to keep track of the \'93cuboid\'94, the ship\'92s location, time, and have functions for the projectile scans described.\
+\
+(after having read the next page on Input)\
+Inputs are mapped to a deliberately silly scheme. We will use a function to unpack this alphabetical thing and create numbers from 2-52. The distance scheme doesn\'92t actually mean what it says it does, since A at position (1,2) on the grid does not correspond to a mine actually 27km away but 27km in depth. There is no Pythagorean triple to find, which simplifies this greatly. There is also no actual 3 dimensional component to this. It\'92s all in two dimensions transforming the whole board on every time tick.\
+\
+Reading the script should be done in a loop and split on white space. Symbols from earlier just need to be parsed out and executed on the current working map.\
+\
+(after having read the section on Output)\
+\
+Looks like every iteration of my loop is going to print a collection of things I should be keeping track of anyway. There are specific things that need to be printed out in a given shape. As far as scoring, this can be kept track of with a state variable. Just a set of rules to follow.\
+\
+(after having read the section on Miscellaneous)\
+\
+This confirms my suspicion that the projectile scan was infinitely fast. We didn\'92t want to be keeping track of a bunch of projectiles for this. Infinite fuel, infinite ammo are pretty standard conditions in keeping with simplifying this problem. Windowing the game field is also pretty standard. \
+\
+(after looking over the examples)\
+\
+These are here as test cases for the program. We will make sure at least these run and maybe some more. Looking at everything suggested in this file, there\'92s nothing to say that it will ever handle fields with even dimensions in x or y? Perhaps this is on purpose, I\'92ll say it is and ignore cases in which this is true because it greatly simplifies the problem. I went back and looked for a rule for how to center the ship in such a case and find only \'93the middle of the grid\'94 confirming that nagging doubt. Were this an actual project, I\'92d ask for additional information on this. I\'92m also going to ignore any input that doesn\'92t all have the same number of columns, however, m by n grids where m and n are odd should be fine.\
+\
+(after a small break)\
+\
+After thinking about the problem a little, I\'92ve come up with a first draft of the major components for this program. First, a representation of the cuboid in two dimensional space. In Python, the basic construction for this is a list of lists but I will be able to get away with a list of strings here. I also need a lookup dictionary for the alphabetical symbols with the numerical values. The rest is encoding the rules in methods and objects. We will make the cuboid object transform itself and provide a print method. The transforms themselves maybe with a method lookup table? The comments in the code will provide some insight into my decision making during this process. Also, this is quite a stack of simple problems. I don\'92t want to spend too much time on this. You mentioned 2-6 hours? I will limit myself to that and send you whatever I have untested or not.}
