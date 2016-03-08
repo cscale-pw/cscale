@@ -214,3 +214,44 @@ if __name__ == '__main__':
     cuboid.populate_from_string(field_string)
 
     for script_line in script_string.splitlines():
+        print ' '.join(['Step', str(i + 1), '\n'])
+        print ''.join([str(cuboid), '\n'])
+        print ''.join([script_line, '\n'])
+        for command in script_line.split(' '):
+            cuboid.transform(command)
+            if command in ['alpha', 'beta', 'gamma', 'delta']:
+                shots_fired_delta = shots_fired_delta + 5
+            if command in ['north', 'south', 'east', 'west']:
+                movement_delta = movement_delta + 2
+
+            # look for interrupt-based clear conditions
+            f_string = ''.join(cuboid.field)
+            if all(map(lambda x: x is '.', f_string)):
+                # everything is clear
+                if i != len(script_string) - 1:
+                    steps_remaining = True
+                break
+            elif all(map(lambda x: x is '*', f_string)):
+                # we found a mine
+                found_mine = True
+                break
+
+    # look for remaining mines
+    if all(map(lambda x: x is '*', f_string)):
+        found_mine = True
+
+    # count up the score
+    if found_mine: # conditions 1 & 2
+        score = 0
+        result = 'fail'
+    elif steps_remaining: # condition 3
+        score = 1
+        result = 'fail'
+    else:
+        # this could all be on one line, but for clarity
+        score = 10 * cuboid.initial_mines
+        score = score - min(shots_fired_delta, 5 * cuboid.initial_mines)
+        score = score - min(movement_delta, 3 * cuboid.initial_mines)
+        result = 'pass'
+
+    print ''.join([result, ' (', str(score), ')'])
