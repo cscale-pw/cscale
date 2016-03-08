@@ -235,6 +235,7 @@ if __name__ == '__main__':
                 # we found a mine
                 found_mine = True
                 break
+        print ''.join([cuboid, '\n'])
         cuboid.fall()
 
     # look for remaining mines
