@@ -235,6 +235,7 @@ if __name__ == '__main__':
                 # we found a mine
                 found_mine = True
                 break
+        cuboid.fall()
 
     # look for remaining mines
     if all(map(lambda x: x is '*', f_string)):
